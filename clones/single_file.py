@@ -1,12 +1,16 @@
 # Here's the first example of duplication
-with open("file1.py") as f:
-    for line in f:
-        print(line)
-        print()
+def remove_duplicates(items):
+    result = []
+    for item in items:
+        if item not in result:
+            result.append(item)
+    return result
 
 
 # Here's the second example of duplication
-with open("file1.py") as f:
-    for line in f:
-        print(line)
-        print()
+def remove_duplicates1(items):
+    result = []
+    for item in items:
+        if item not in result:
+            result.append(item)
+    return result
