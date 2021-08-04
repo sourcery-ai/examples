@@ -1,0 +1,43 @@
+#####
+#
+# Sourcery Configuration
+#
+# All keys are optional and default as shown
+#
+#####
+
+# Paths to ignore from Sourcery refactorings
+#
+# Sourcery GitHub Bot always adds .github/workflow/* as the workflows folder
+# cannot be updated by bots
+#
+ignore: []
+
+# Refactoring config
+refactor:
+  # Refactoring ids to skip
+  #
+  # These refactorings will never be suggested by Sourcery
+  skip:
+  - extract-constant
+  - order-statements
+
+# Code Metrics configuration - VS Code extension
+metrics:
+  # These are shown at the method level when hovering the mouse
+  # over the method name.
+  #
+  # The quality score is a percentage.
+  #
+  # Methods with a quality lower than this threshold will be flagged
+  # as warnings.
+  #
+  quality_threshold: 25.0
+
+
+
+clone_detection:
+  min_lines: 3
+  min_duplicates: 2
+  identical_clones_only: false
+
