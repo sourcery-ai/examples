@@ -13,8 +13,8 @@ def create_sliders():
     force_slider = Slider(5, from_=1, to=10, orient=HORIZONTAL, label="Force")
     force_slider.pack()
     force_slider.set(DEFAULT_FORCE)
-
     force_slider.configure(background="green")
+
     return speed_slider, force_slider
 
 
