@@ -1,0 +1,61 @@
+# Perform a code review on a pull request using the Sourcery Coding Assistant.
+
+name: Sourcery Coding Assistant Review
+
+on:
+  # Trigger the review on pull request events.
+  pull_request:
+    types:
+    # Trigger the review when either of these events occur:
+    #
+    # - a review is requested from any user
+    # - the "sourcery-review" label is added to the pull request: add this label
+    #   to your pull request to trigger a review. To re-request reviews, remove the
+    #   label and add it again.
+    #
+    # Feel free to edit this list to suit your team's needs. See the list of all
+    # activity types here:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request
+    - review_requested
+    - labeled
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  sourcery-coding-assistant-review:
+    # Only run this job when a review is requested or the "sourcery-review"
+    # label is added to the pull request.
+    if: |
+      github.event.action == 'review_requested' ||
+        github.event.label.name == 'sourcery-review'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Sourcery
+        shell: bash
+        # Install the latest nightly version of Sourcery from PyPI.
+        # This gives you access to the latest features and bug fixes.
+        # To install the latest stable version, use `pip install sourcery`.
+        run: |
+          pip install --pre sourcery-nightly
+
+      - name: Log into Sourcery
+        shell: bash
+        # Log into Sourcery using the Sourcery token stored in the SOURCERY_TOKEN GitHub
+        # secret.
+        run: |
+          sourcery login \
+            --token ${{ secrets.SOURCERY_TOKEN }}
+
+      - name: Run Sourcery code review
+        # Run the Sourcery code review on the pull request that triggered this workflow.
+        shell: bash
+        run: |
+          sourcery assistant review pull-request \
+            --token ${{ github.token }} \
+            --repository ${{ github.repository }} \
+            --pull-request ${{ github.event.pull_request.number }} \
+            --commit ${{ github.event.pull_request.head.sha }}
