@@ -19,9 +19,11 @@ on:
     - review_requested
     - labeled
 
-# permissions:
-#   contents: read
-#   pull-requests: write
+permissions:
+  # Read the contents of the repository
+  contents: read
+  # Create a pull request review
+  pull-requests: write
 
 jobs:
   sourcery-coding-assistant-review:
