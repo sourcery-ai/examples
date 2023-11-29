@@ -35,7 +35,7 @@ jobs:
     if: |
       github.event.action == 'opened' && !github.event.pull_request.draft ||
         github.event.action == 'ready_for_review' ||
-        github.event.label.name == 'sourcery-review'
+        github.event.action == 'labeled' && github.event.label.name == 'sourcery-review'
 
     runs-on: ubuntu-latest
 
