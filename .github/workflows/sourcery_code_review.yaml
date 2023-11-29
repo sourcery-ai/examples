@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   sourcery-coding-assistant-review:
-    # Only run this job when a PR is opened in and is not in draft state,
+    # Only run this job when a PR is opened and is not in draft state,
     # is moved from draft to ready for review,
     # or the "sourcery-review" label is added to the pull request.
     if: |
