@@ -1,4 +1,23 @@
-# Perform a code review on a merge request using the Sourcery Coding Assistant.
+# Perform a code review on a merge request using the Sourcery review
+
+# GitLab setup instructions:
+# 1. Add the `sourcery_review` pipeline below into your project's `.gitlab-ci.yml`
+# 2. Create a Project/Group Access Token for posting reviews to merge requests - `SOURCERY_AI_BOT`
+#     - Go to Settings > Access Tokens
+#     - Create a new Access Token with name `SOURCERY_AI_BOT` and scope `api`
+#     - Click on "Create access token"
+# 3. Store your Sourcery token as a Project/Group CI/CD variable - `SOURCERY_TOKEN`
+#     - First get your Sourcery token
+#     - Go to Settings > CI/CD
+#     - Expand the Variables section.
+#     - Add a new variable:
+#         - Key: `SOURCERY_TOKEN`.
+#         - Value: <Your Sourcery token>
+#         - Flags:
+#             - ❌ Protect variable
+#             - ✅ Mask variable
+#             - ❌ Expand variable reference
+#     - Click on "Add variable"
 
 sourcery_review:
   stage: test
