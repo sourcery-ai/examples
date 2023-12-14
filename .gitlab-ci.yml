@@ -1,0 +1,16 @@
+# Perform a code review on a merge request using the Sourcery Coding Assistant.
+
+sourcery_review:
+  stage: test
+  image: python:slim
+  script:
+      - pip install --pre sourcery-nightly
+      - sourcery login --token $SOURCERY_TOKEN 
+      - |
+        sourcery assistant review gitlab-merge-request \
+            --gitlab-token $SOURCERY_AI_BOT \
+            --project $CI_PROJECT_PATH \
+            --merge-request $CI_MERGE_REQUEST_IID \
+            --commit $CI_COMMIT_SHA
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
